@@ -15,7 +15,6 @@ export default class FilmsPresenter {
   filmsComponent = new FilmsView();
   filmListComponent = new FilmListView();
   filmListContainerComponent = new FilmListContainerView();
-  filmCardComponent = new FilmCardView();
   filmButtonMoreComponent = new FilmButtonMoreView();
   filmDetailsComponent = new FilmDetailsView();
 
