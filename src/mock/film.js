@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomFractional } from '../utils';
+import { getRandomInteger, getRandomFloat } from '../utils';
 
 const generatePoster = () => {
   const posters = [
@@ -30,7 +30,7 @@ const generateFilmName = () => {
   return FilmsNames[randomIndex];
 };
 
-const generateRating = () => getRandomFractional(1, 10).toFixed(1);
+const generateRating = () => getRandomFloat(1, 10).toFixed(1);
 
 const generateYear = () => getRandomInteger(1950, 2024);
 
