@@ -131,11 +131,11 @@ const generateComments = () => ({
   emotion: generateEmotion(),
 });
 
-export const generateTask = () => ({
+export const generateFilm = () => ({
   poster: generatePoster(),
   filmName: generateFilmName(),
   rating: generateRating(),
-  releaseYear: generateYear(), // TODO доработать с dayjs
+  releaseYear: generateYear(),
   duration: '1h 55m', // TODO доработать с dayjs
   genre: generateGenre(),
   description: generateDescription(),
