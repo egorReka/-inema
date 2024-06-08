@@ -12,4 +12,10 @@ const getRandomFloat = (a = 1, b = 0) => {
   return lower + Math.random() * (upper - lower);
 };
 
-export { getRandomInteger, getRandomFloat };
+const getRandomValue = (items) => {
+  const randomIndex = getRandomInteger(0, items.length - 1);
+
+  return items[randomIndex];
+};
+
+export { getRandomInteger, getRandomFloat, getRandomValue };
