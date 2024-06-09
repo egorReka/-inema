@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -18,4 +20,27 @@ const getRandomValue = (items) => {
   return items[randomIndex];
 };
 
-export { getRandomInteger, getRandomFloat, getRandomValue };
+const formatStringToDateWithTime = (date) => dayjs(date).format('YYYY/MM/DD hh:mm'); // 2019/12/31 23:59
+
+const formatStringToYear = (date) => dayjs(date).format('YYYY');
+
+const formatStringToDate = (date) => dayjs(date).format('D MMMM YYYY');
+
+const formatMinutesToTime = (minutes) => {
+  const MINUTES_PER_HOUR = 60;
+
+
+  return (MINUTES_PER_HOUR > minutes)
+    ? `${minutes}`
+    : `${Math.floor(minutes / MINUTES_PER_HOUR)}h ${minutes % MINUTES_PER_HOUR}m`;
+};
+
+export {
+  getRandomInteger,
+  getRandomFloat,
+  getRandomValue,
+  formatMinutesToTime,
+  formatStringToDateWithTime,
+  formatStringToYear,
+  formatStringToDate
+};
