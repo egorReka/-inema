@@ -1,14 +1,17 @@
-import { getRandomValue } from '../utils';
+import dayjs from 'dayjs';
+import { getRandomInteger, getRandomValue } from '../utils';
 import { AUTORS, MESSAGES, EMOTIONS } from './const';
 
 const generateComment = () => ({
   autor: getRandomValue(AUTORS),
   message: getRandomValue(MESSAGES),
-  date: '2021-01-01T00:00:00.000Z', // TODO доработать с dayjs
+  date: dayjs().subtract(getRandomInteger(0, 500), 'day'),
   emotion: getRandomValue(EMOTIONS),
 });
 
-const getCommentsCount = (films) => films.reduce((count, film) => count + film.comments.length, 0);
+const getCommentsCount = (films) => films.reduce(
+  (count, film) => count + film.comments.length, 0
+);
 
 const generateComments = (films) => {
   const commentsCount = getCommentsCount(films);

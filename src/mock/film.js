@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { getRandomFloat, getRandomInteger, getRandomValue } from '../utils';
 import { POSTERS, TITLES, GENRES, DESCRIPTIONS, ALTERNATIVE_TITLES, DIRECTORS, WRITERS, ACTORS, COUNTRYS, } from './const';
 
@@ -5,6 +6,14 @@ const FILM_COUNT = 5;
 const MAX_COMMENTS_ON_FILM = 10;
 
 const generateRating = () => getRandomFloat(1, 10).toFixed(1);
+const generateDate = () => dayjs().subtract(getRandomInteger(0, 100), 'year');
+
+
+const generateGenre = (genres) => {
+  const countGenres = getRandomInteger(1, 3);
+
+  return Array.from({length: countGenres}, () => genres[getRandomInteger(1, genres.length - 1)]);
+};
 
 const generateFilm = () => ({
   poster: getRandomValue(POSTERS),
@@ -15,11 +24,11 @@ const generateFilm = () => ({
   writers: getRandomValue(WRITERS),
   actors: getRandomValue(ACTORS),
   release: {
-    date: '2021-01-01T00:00:00.000Z', // TODO доработать с dayjs
+    date: generateDate(),
     country: getRandomValue(COUNTRYS),
   },
-  runtime: 115, // TODO доработать с dayjs
-  genre: getRandomValue(GENRES),
+  runtime: getRandomInteger(30, 400),
+  genre: generateGenre(GENRES),
   description: getRandomValue(DESCRIPTIONS),
 });
 

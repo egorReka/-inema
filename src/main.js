@@ -19,7 +19,7 @@ const filmsPresenter = new FilmsPresenter();
 
 
 const filmsModel = new FilmsModel();
-const commentsModel = new CommentsModel();
+const commentsModel = new CommentsModel(filmsModel);
 
 render(new HeaderProfileView(), siteHeaderElement);
 render(new FilterView(), siteMainElement);

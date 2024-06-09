@@ -1,7 +1,25 @@
 import { generateComments } from '../mock/comment';
 
 export default class CommentsModel {
-  comments = generateComments();
+  filmsModel = null;
+  allComments = [];
+  comments = [];
 
-  get = () => this.comments;
+  constructor(filmsModel) {
+    this.filmsModel = filmsModel;
+    this.generateAllComments();
+  }
+
+  generateAllComments() {
+    this.allComments = generateComments(this.filmsModel.get());
+  }
+
+  get = (film) => {
+    this.comments = film.comments.map((commentId) =>
+      this.allComments.find((comment) =>
+        comment.id === commentId)
+    );
+
+    return this.comments;
+  };
 }
