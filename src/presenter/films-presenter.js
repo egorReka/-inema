@@ -7,7 +7,6 @@ import FilmCardView from '../view/film-card-view';
 import FilmButtonMoreView from '../view/film-button-more-view';
 import FilmDetailsView from '../view/film-details-view';
 
-
 export default class FilmsPresenter {
   #container = null;
   #filmsModel = null;
@@ -18,8 +17,20 @@ export default class FilmsPresenter {
   #filmListComponent = new FilmListView();
   #filmListContainerComponent = new FilmListContainerView();
   #filmButtonMoreComponent = new FilmButtonMoreView();
+  #filmDetailsComponent = null;
 
   #films = [];
+
+  #renderFilm = (film, container) => {
+    const filmCardComponent = new FilmCardView(film);
+    const linkFilmCardElement = filmCardComponent.element.querySelector('a');
+
+    linkFilmCardElement.addEventListener('click', () => {
+      this.#renderFilmDetails(film);
+    });
+
+    render(filmCardComponent, container.element);
+  };
 
   init = (container, filmsModel, commentsModel) => {
     this.#container = container;
@@ -34,14 +45,27 @@ export default class FilmsPresenter {
     render(this.#filmListContainerComponent, this.#filmListComponent.element);
 
     for (let i = 0; i < this.#films.length; i++) {
-      render(new FilmCardView(this.#films[i]), this.#filmListContainerComponent.element);
+      this.#renderFilm(this.#films[i], this.#filmListContainerComponent);
     }
 
     render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
+  };
 
-    this.#commentsModel.film = this.#films[0];
+  #renderFilmDetails = (film) => {
+    this.#commentsModel.film = film;
     const comments = [...this.#commentsModel.film];
 
-    render(new FilmDetailsView(this.#films[0], comments), this.#container.parentElement);
+    this.#filmDetailsComponent = new FilmDetailsView(film, comments);
+
+    const closeButtonFilmDetailsElement =
+      this.#filmDetailsComponent.element
+        .querySelector('.film-details__close-btn');
+
+    closeButtonFilmDetailsElement.addEventListener('click', () => {
+      this.#filmDetailsComponent.element.remove();
+      this.#filmDetailsComponent = null;
+    });
+
+    render(this.#filmDetailsComponent, this.#container.parentElement);
   };
 }
