@@ -9,32 +9,39 @@ import FilmDetailsView from '../view/film-details-view';
 
 
 export default class FilmsPresenter {
-  sortComponent = new SortView();
-  filmsComponent = new FilmsView();
-  filmListComponent = new FilmListView();
-  filmListContainerComponent = new FilmListContainerView();
-  filmButtonMoreComponent = new FilmButtonMoreView();
+  #container = null;
+  #filmsModel = null;
+  #commentsModel = null;
+
+  #sortComponent = new SortView();
+  #filmsComponent = new FilmsView();
+  #filmListComponent = new FilmListView();
+  #filmListContainerComponent = new FilmListContainerView();
+  #filmButtonMoreComponent = new FilmButtonMoreView();
+
+  #films = [];
 
   init = (container, filmsModel, commentsModel) => {
-    this.container = container;
-    this.filmsModel = filmsModel;
-    this.commentsModel = commentsModel;
+    this.#container = container;
+    this.#filmsModel = filmsModel;
+    this.#commentsModel = commentsModel;
 
-    this.films = [...this.filmsModel.get()];
+    this.#films = [...this.#filmsModel.films];
 
-    render(this.sortComponent, this.container);
-    render(this.filmsComponent, this.container);
-    render(this.filmListComponent, this.filmsComponent.getElement());
-    render(this.filmListContainerComponent, this.filmListComponent.getElement());
+    render(this.#sortComponent, this.#container);
+    render(this.#filmsComponent, this.#container);
+    render(this.#filmListComponent, this.#filmsComponent.element);
+    render(this.#filmListContainerComponent, this.#filmListComponent.element);
 
-    for (let i = 0; i < this.films.length; i++) {
-      render(new FilmCardView(this.films[i]), this.filmListContainerComponent.getElement());
+    for (let i = 0; i < this.#films.length; i++) {
+      render(new FilmCardView(this.#films[i]), this.#filmListContainerComponent.element);
     }
 
-    render(this.filmButtonMoreComponent, this.filmListComponent.getElement());
+    render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
 
-    const comments = [...this.commentsModel.get(this.films[0])];
+    this.#commentsModel.film = this.#films[0];
+    const comments = [...this.#commentsModel.film];
 
-    render(new FilmDetailsView(this.films[0], comments), this.container.parentElement);
+    render(new FilmDetailsView(this.#films[0], comments), this.#container.parentElement);
   };
 }
