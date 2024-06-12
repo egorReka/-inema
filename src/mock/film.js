@@ -42,7 +42,7 @@ const generateFilms = () => {
 
     const filmCommentsCount  = getRandomInteger(1, MAX_COMMENTS_ON_FILM);
 
-    totalCommentsCount += filmCommentsCount;
+    if (hasComments) {totalCommentsCount += filmCommentsCount;}
 
     return {
       id: String(index + 1),
