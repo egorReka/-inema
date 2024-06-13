@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import { getRandomFloat, getRandomInteger, getRandomValue } from '../utils';
-import { POSTERS, TITLES, GENRES, DESCRIPTIONS, ALTERNATIVE_TITLES, DIRECTORS, WRITERS, ACTORS, COUNTRYS, } from './const';
-
-const FILM_COUNT = 5;
-const MAX_COMMENTS_ON_FILM = 10;
+import {
+  POSTERS, TITLES, GENRES,
+  DESCRIPTIONS, ALTERNATIVE_TITLES,
+  DIRECTORS, WRITERS, ACTORS, COUNTRYS,
+  FILM_COUNT, MAX_COMMENTS_ON_FILM
+} from './const';
 
 const generateRating = () => getRandomFloat(1, 10).toFixed(1);
 const generateDate = () => dayjs().subtract(getRandomInteger(0, 100), 'year');
-
 
 const generateGenre = (genres) => {
   const countGenres = getRandomInteger(1, 3);

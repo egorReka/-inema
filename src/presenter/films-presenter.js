@@ -6,6 +6,7 @@ import FilmListContainerView from '../view/film-list-container-view';
 import FilmCardView from '../view/film-card-view';
 import FilmButtonMoreView from '../view/film-button-more-view';
 import FilmDetailsView from '../view/film-details-view';
+import { FILM_COUNT_PER_STEP } from '../mock/const';
 
 export default class FilmsPresenter {
   #container = null;
@@ -20,24 +21,51 @@ export default class FilmsPresenter {
   #filmDetailsComponent = null;
 
   #films = [];
+  #renderedFilmCount = FILM_COUNT_PER_STEP;
 
-  init = (container, filmsModel, commentsModel) => {
+  constructor(container, filmsModel, commentsModel) {
     this.#container = container;
     this.#filmsModel = filmsModel;
     this.#commentsModel = commentsModel;
+  }
 
+  init = () => {
     this.#films = [...this.#filmsModel.films];
 
+    this.#renderFilmBoard();
+  };
+
+  #renderFilmBoard() {
     render(this.#sortComponent, this.#container);
     render(this.#filmsComponent, this.#container);
     render(this.#filmListComponent, this.#filmsComponent.element);
     render(this.#filmListContainerComponent, this.#filmListComponent.element);
 
-    for (let i = 0; i < this.#films.length; i++) {
-      this.#renderFilm(this.#films[i], this.#filmListContainerComponent);
-    }
+    this.#films.slice(0, Math.min(this.#films.length, FILM_COUNT_PER_STEP))
+      .forEach((film) =>
+        this.#renderFilm(film, this.#filmListContainerComponent));
 
-    render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
+    if (this.#films.length > FILM_COUNT_PER_STEP) {
+      render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
+      this.#filmButtonMoreComponent
+        .element
+        .addEventListener('click', this.#filmButtonMoreClickHandler);
+    }
+  }
+
+  #filmButtonMoreClickHandler = (evt) => {
+    evt.preventDefault();
+
+    this.#films.slice(this.#renderedFilmCount, this.#renderedFilmCount + FILM_COUNT_PER_STEP)
+      .forEach((film) =>
+        this.#renderFilm(film, this.#filmListContainerComponent));
+
+    this.#renderedFilmCount += FILM_COUNT_PER_STEP;
+
+    if (this.#renderedFilmCount >= this.#films.length) {
+      this.#filmButtonMoreComponent.element.remove();
+      this.#filmButtonMoreComponent.removeElement();
+    }
   };
 
   #renderFilm = (film, container) => {

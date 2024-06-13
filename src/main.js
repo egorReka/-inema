@@ -15,14 +15,14 @@ import FilmsPresenter from './presenter/films-presenter';
 const siteHeaderElement = document.querySelector('.header');
 const siteMainElement = document.querySelector('.main');
 const siteFooterElement = document.querySelector('.footer');
-const filmsPresenter = new FilmsPresenter();
 
 
 const filmsModel = new FilmsModel();
 const commentsModel = new CommentsModel(filmsModel);
+const filmsPresenter = new FilmsPresenter(siteMainElement, filmsModel, commentsModel);
 
 render(new HeaderProfileView(), siteHeaderElement);
 render(new FilterView(), siteMainElement);
 render(new FooterStatisticsView(), siteFooterElement);
 
-filmsPresenter.init(siteMainElement, filmsModel, commentsModel);
+filmsPresenter.init();
