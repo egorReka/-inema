@@ -21,17 +21,6 @@ export default class FilmsPresenter {
 
   #films = [];
 
-  #renderFilm = (film, container) => {
-    const filmCardComponent = new FilmCardView(film);
-    const linkFilmCardElement = filmCardComponent.element.querySelector('a');
-
-    linkFilmCardElement.addEventListener('click', () => {
-      this.#renderFilmDetails(film);
-    });
-
-    render(filmCardComponent, container.element);
-  };
-
   init = (container, filmsModel, commentsModel) => {
     this.#container = container;
     this.#filmsModel = filmsModel;
@@ -51,6 +40,18 @@ export default class FilmsPresenter {
     render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
   };
 
+  #renderFilm = (film, container) => {
+    const filmCardComponent = new FilmCardView(film);
+    const linkFilmCardElement = filmCardComponent.element.querySelector('a');
+
+    linkFilmCardElement.addEventListener('click', () => {
+      this.#addFilmDetailsComponent(film);
+      document.addEventListener('keydown', this.#onEscKeyDown);
+    });
+
+    render(filmCardComponent, container.element);
+  };
+
   #renderFilmDetails = (film) => {
     this.#commentsModel.film = film;
     const comments = [...this.#commentsModel.film];
@@ -62,10 +63,27 @@ export default class FilmsPresenter {
         .querySelector('.film-details__close-btn');
 
     closeButtonFilmDetailsElement.addEventListener('click', () => {
-      this.#filmDetailsComponent.element.remove();
-      this.#filmDetailsComponent = null;
+      this.#removeFilmDetailsComponent();
     });
 
     render(this.#filmDetailsComponent, this.#container.parentElement);
+  };
+
+  #addFilmDetailsComponent = (film) => {
+    this.#renderFilmDetails(film);
+    document.body.classList.add('hide-overflow');
+  };
+
+  #removeFilmDetailsComponent = () => {
+    this.#filmDetailsComponent.element.remove();
+    this.#filmDetailsComponent = null;
+    document.body.classList.remove('hide-overflow');
+  };
+
+  #onEscKeyDown = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      this.#removeFilmDetailsComponent();
+    }
   };
 }
