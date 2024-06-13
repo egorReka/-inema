@@ -1,12 +1,17 @@
 import { createElement } from '../render';
 
-const createFilmListTemplate = () => '<section class="films-list"></section>';
+const createFilmListEmptyTemplate = () =>
+  `
+    <section class="films-list">
+      <h2 class="films-list__title">There are no movies in our database</h2>
+    </section>
+  `;
 
-export default class FilmListView {
+export default class FilmListEmptyView {
   #element = null;
 
   get template() {
-    return createFilmListTemplate();
+    return createFilmListEmptyTemplate();
   }
 
   get element() {

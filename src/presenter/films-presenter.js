@@ -6,6 +6,7 @@ import FilmListContainerView from '../view/film-list-container-view';
 import FilmCardView from '../view/film-card-view';
 import FilmButtonMoreView from '../view/film-button-more-view';
 import FilmDetailsView from '../view/film-details-view';
+import FilmListEmptyView from '../view/film-list-empty-view';
 import { FILM_COUNT_PER_STEP } from '../mock/const';
 
 export default class FilmsPresenter {
@@ -36,6 +37,11 @@ export default class FilmsPresenter {
   };
 
   #renderFilmBoard() {
+    if (this.#films.length === 0) {
+      render(new FilmListEmptyView(), this.#container);
+      return;
+    }
+
     render(this.#sortComponent, this.#container);
     render(this.#filmsComponent, this.#container);
     render(this.#filmListComponent, this.#filmsComponent.element);
