@@ -1,4 +1,4 @@
-import { render } from './render';
+import { render } from './framework/render';
 
 // Model
 import FilmsModel from './model/film-model';

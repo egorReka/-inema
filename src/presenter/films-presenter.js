@@ -1,4 +1,4 @@
-import {render} from '../render';
+import { render } from '../framework/render';
 import SortView from '../view/filter-view';
 import FilmsView from '../view/films-view';
 import FilmListView from '../view/film-list-view';
