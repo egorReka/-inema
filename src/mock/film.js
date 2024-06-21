@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { getRandomFloat, getRandomInteger, getRandomValue } from '../utils';
+import { getRandomFloat, getRandomInteger, getRandomValue } from '../utils/common';
 import {
   POSTERS, TITLES, GENRES,
   DESCRIPTIONS, ALTERNATIVE_TITLES,

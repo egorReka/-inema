@@ -1,4 +1,4 @@
-import { formatMinutesToTime, formatStringToDate } from '../utils';
+import { convertMinutesToHours, humanizeDateToDateMonthYear } from '../utils/film';
 
 const generateGenreTitle = (genre) =>
   (genre.length > 1)
@@ -49,11 +49,11 @@ export const createFilmDetailsInfoTemplate = (filmInfo) => {
           </tr>
           <tr class="film-details__row">
             <td class="film-details__term">Release Date</td>
-            <td class="film-details__cell">${formatStringToDate(date)}</td>
+            <td class="film-details__cell">${humanizeDateToDateMonthYear(date)}</td>
           </tr>
           <tr class="film-details__row">
             <td class="film-details__term">Runtime</td>
-            <td class="film-details__cell">${formatMinutesToTime(runtime)}</td>
+            <td class="film-details__cell">${convertMinutesToHours(runtime)}</td>
           </tr>
           <tr class="film-details__row">
             <td class="film-details__term">Country</td>

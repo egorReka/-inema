@@ -1,4 +1,4 @@
-import { formatStringToDateWithTime } from '../utils';
+import { humanizeDateWithTime } from '../utils/film';
 
 const createCommentTemplate = ({autor, message, date, emotion }) =>
   `
@@ -10,7 +10,7 @@ const createCommentTemplate = ({autor, message, date, emotion }) =>
         <p class="film-details__comment-text">${message}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${autor}</span>
-          <span class="film-details__comment-day">${formatStringToDateWithTime(date)}</span>
+          <span class="film-details__comment-day">${humanizeDateWithTime(date)}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
