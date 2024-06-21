@@ -53,15 +53,12 @@ export default class FilmsPresenter {
 
     if (this.#films.length > FILM_COUNT_PER_STEP) {
       render(this.#filmButtonMoreComponent, this.#filmListComponent.element);
-      this.#filmButtonMoreComponent
-        .element
-        .addEventListener('click', this.#filmButtonMoreClickHandler);
+
+      this.#filmButtonMoreComponent.setButtonClickHandler(this.#filmButtonMoreClickHandler);
     }
   }
 
-  #filmButtonMoreClickHandler = (evt) => {
-    evt.preventDefault();
-
+  #filmButtonMoreClickHandler = () => {
     this.#films.slice(this.#renderedFilmCount, this.#renderedFilmCount + FILM_COUNT_PER_STEP)
       .forEach((film) =>
         this.#renderFilm(film, this.#filmListContainerComponent));
@@ -91,14 +88,7 @@ export default class FilmsPresenter {
     const comments = [...this.#commentsModel.film];
 
     this.#filmDetailsComponent = new FilmDetailsView(film, comments);
-
-    const closeButtonFilmDetailsElement =
-      this.#filmDetailsComponent.element
-        .querySelector('.film-details__close-btn');
-
-    closeButtonFilmDetailsElement.addEventListener('click', () => {
-      this.#removeFilmDetailsComponent();
-    });
+    this.#filmDetailsComponent.setCloseButtonClickHandler(this.#removeFilmDetailsComponent);
 
     render(this.#filmDetailsComponent, this.#container.parentElement);
   };
