@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import { createFilmCardInfoTemplate } from './film-card-info-template';
 import  { createFilmCardControlsTemplate }  from './film-card-controls-template';
 
@@ -13,27 +13,15 @@ const createFilmCardTemplate = ({ filmInfo, comments }) =>
     </article>
   `;
 
-export default class FilmCardView {
-  #element = null;
+export default class FilmCardView extends AbstractView {
   #film = null;
 
   constructor(film) {
+    super();
     this.#film = film;
   }
 
   get template() {
     return createFilmCardTemplate(this.#film);
-  }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
   }
 }
