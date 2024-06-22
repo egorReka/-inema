@@ -1,17 +1,18 @@
 import AbstractView from '../framework/view/abstract-view';
 
-const createFilterTemplate = () =>
+const createSortTemplate = () =>
   `
-  <nav class="main-navigation">
-    <a href="#all" class="main-navigation__item main-navigation__item--active">All movies</a>
-    <a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">0</span></a>
-    <a href="#history" class="main-navigation__item">History <span class="main-navigation__item-count">0</span></a>
-    <a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">0</span></a>
-  </nav>
+  <ul class="sort">
+    <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
+    <li><a href="#" class="sort__button">Sort by date</a></li>
+    <li><a href="#" class="sort__button">Sort by rating</a></li>
+  </ul>
   `;
 
-export default class FilterView extends AbstractView {
+export default class SortView extends AbstractView {
   get template() {
-    return createFilterTemplate();
+    return createSortTemplate();
   }
+
+
 }
