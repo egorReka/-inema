@@ -1,7 +1,3 @@
-const FILM_COUNT = 13;
-const MAX_COMMENTS_ON_FILM = 10;
-const FILM_COUNT_PER_STEP = 5;
-
 const POSTERS = [
   '/images/posters/made-for-each-other.png',
   '/images/posters/popeye-meets-sinbad.png',
@@ -134,12 +130,7 @@ const MESSAGES = [
   'I don\'t like this film',
 ];
 
-const EMOTIONS = ['smile', 'sleeping', 'puke', 'angry'];
-
 export {
-  FILM_COUNT,
-  FILM_COUNT_PER_STEP,
-  MAX_COMMENTS_ON_FILM,
   DIRECTORS,
   WRITERS,
   ACTORS,
@@ -151,5 +142,4 @@ export {
   DESCRIPTIONS,
   AUTORS,
   MESSAGES,
-  EMOTIONS,
 };

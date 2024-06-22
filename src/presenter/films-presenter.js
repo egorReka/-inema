@@ -1,5 +1,5 @@
 import { render } from '../framework/render';
-import SortView from '../view/filter-view';
+import SortView from '../view/sort-view';
 import FilmsView from '../view/films-view';
 import FilmListView from '../view/film-list-view';
 import FilmListContainerView from '../view/film-list-container-view';
@@ -7,7 +7,7 @@ import FilmCardView from '../view/film-card-view';
 import FilmButtonMoreView from '../view/film-button-more-view';
 import FilmDetailsView from '../view/film-details-view';
 import FilmListEmptyView from '../view/film-list-empty-view';
-import { FILM_COUNT_PER_STEP } from '../mock/const';
+import { FILM_COUNT_PER_STEP } from '../const';
 
 export default class FilmsPresenter {
   #container = null;
@@ -32,7 +32,6 @@ export default class FilmsPresenter {
 
   init = () => {
     this.#films = [...this.#filmsModel.films];
-
     this.#renderFilmBoard();
   };
 

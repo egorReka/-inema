@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { getRandomInteger, getRandomValue } from '../utils/common';
-import { AUTORS, MESSAGES, EMOTIONS } from './const';
+import { AUTORS, MESSAGES } from './const';
+import { EMOTIONS } from '../const';
 
 const generateComment = () => ({
   autor: getRandomValue(AUTORS),

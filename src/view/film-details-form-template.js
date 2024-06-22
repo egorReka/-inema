@@ -1,4 +1,4 @@
-import { EMOTIONS } from '../mock/const';
+import { EMOTIONS } from '../const';
 
 const createEmotionItem = (emotion) =>
   `
